@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:text=" Discotecas"
+        />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ciudad: "
+            android:id="@+id/textCiudad"
+            android:textSize="20dp"
+            android:layout_alignParentLeft="true"
+            android:paddingTop="10dp"
+            android:paddingLeft="5dp"
+            />
+
+        <Spinner
+            android:id="@+id/ciudad_spinner"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@+id/textCiudad"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="zona: "
+            android:id="@+id/textZona"
+            android:textSize="20dp"
+            android:layout_toLeftOf="@+id/zonas_spinner"
+            android:paddingTop="10dp"
+            />
+
+        <Spinner
+            android:id="@+id/zonas_spinner"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            />
+
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:divider="#b5b5b5"
+        android:dividerHeight="1dp"
+        android:listSelector="@drawable/list_selector"
+        />
+
+</LinearLayout>

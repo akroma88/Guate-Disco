@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_selector_comment"
+    android:orientation="horizontal"
+    android:padding="5dip" >
+
+    <!--  ListRow Left sied Thumbnail image -->
+    <LinearLayout android:id="@+id/thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dip"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dip">
+
+        <ImageView
+            android:id="@+id/imageUser"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:src="@drawable/rihanna"/>
+    </LinearLayout>
+
+    <!-- Title Of disco-->
+    <TextView
+        android:id="@+id/nameUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/thumbnail"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:text="Alejo"
+        android:textColor="#040404"
+        android:typeface="sans"
+        android:textSize="10dip"
+        android:textStyle="bold"/>
+
+    <RatingBar
+        android:id="@+id/commetDiscRating"
+        android:layout_width="wrap_content"
+        android:layout_height="17dp"
+        android:layout_marginLeft="5dip"
+        android:layout_toRightOf="@+id/nameUser"
+        style="@style/commentRatingBar"
+        android:numStars="5"
+        android:rating="2.5"
+        android:isIndicator="true"
+        />
+
+    <TextView
+        android:id="@+id/commentDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/thumbnail"
+        android:layout_toRightOf="@+id/commetDiscRating"
+        android:text="2015-10-07"
+        android:textColor="#040404"
+        android:typeface="sans"
+        android:textSize="10dip"
+        android:textStyle="bold"
+        android:paddingLeft="7dp"
+        />
+
+    <!-- Text of comment -->
+    <TextView
+        android:id="@+id/textComment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#343434"
+        android:textSize="10dip"
+        android:layout_marginTop="15dip"
+        android:layout_marginLeft="1dip"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:text="Hay opciones como amigos, buscar amigos, paginas entre otras que la aplicacion no carga... tengo una tablet samsung galaxy tab 3 y nunca me habia dado problemas hasta estas ultimas 2 actualizaciones." />
+
+</RelativeLayout>
