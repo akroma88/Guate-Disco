@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,7 +30,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 public class MainActivity extends AppCompatActivity{
-    Button btnSegundo;
+    ImageButton btnSegundo;
     ImageView imageView12;
     TextView texto;
     @Override
@@ -38,15 +39,14 @@ public class MainActivity extends AppCompatActivity{
 
 
         setContentView(R.layout.activity_main);
-        btnSegundo = (Button) findViewById(R.id.buttonSig);
+        btnSegundo = (ImageButton) findViewById(R.id.buttonSig);
         texto = (TextView)findViewById(R.id.queEsGD);
 
         imageView12 = (ImageView)findViewById(R.id.imageGD);
-        Picasso.with(MainActivity.this).load("http://1.bp.blogspot.com/-C_WvY5YfBP0/VZ8rSn_VGbI/AAAAAAAAAzs/NmkCirkNE84/s1600/rojo%2B%25281%2529.png").resize(350, 350)
-                .transform(new CropCircleTransformation())
+        Picasso.with(MainActivity.this).load(R.drawable.logo).resize(350, 350)
                 .into(imageView12);
 
-        texto.setText("El mejor donde podras encontrar las mejores discotecas de Guatemala");
+        texto.setText("El lugar donde podras encontrar las mejores discotecas de Guatemala");
     }
 
     public  void onClickButtonSig(View view){

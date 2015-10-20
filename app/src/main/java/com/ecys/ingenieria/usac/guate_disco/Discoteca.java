@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +37,7 @@ public class Discoteca extends AppCompatActivity {
     TextView textViewDireccion;
     TextView textViewTelefono;
     Button btnEscribOpionion;
+    ImageButton btnOfertas;
     ListView list;
     CommentAdapter commentAdapter;
     String json="";
@@ -51,6 +53,7 @@ public class Discoteca extends AppCompatActivity {
         textViewTelefono = (TextView)findViewById(R.id.textTelDisco);
         list = (ListView)findViewById(R.id.listComment);
         btnEscribOpionion = (Button)findViewById(R.id.button_escribe_opinion);
+        btnOfertas = (ImageButton)findViewById(R.id.btn_promo);
 
         textViewNombre.setText(this.nombre);
         textViewDireccion.setText(this.direccion);
@@ -59,14 +62,25 @@ public class Discoteca extends AppCompatActivity {
         getCommentarios(idDisco);
 
 
-
         btnEscribOpionion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Discoteca.this, NewComment.class);
                 startActivity(intent);
                 NewComment.idDiscoteca = idDisco;
-                NewComment.nameDiscoteca= nombre;
+                NewComment.nameDiscoteca = nombre;
+            }
+        });
+
+        btnOfertas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = getApplicationContext();
+                CharSequence text = "Muy pronto!";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
             }
         });
     }

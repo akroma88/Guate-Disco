@@ -43,10 +43,10 @@
         android:textStyle="bold"
         />
 
-    <Button
+    <ImageButton
         android:layout_width="565px"
         android:layout_height="200px"
-        android:id="@+id/imageButton"
+        android:id="@+id/btn_promo"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/promociones"
         android:layout_marginTop="5dip"

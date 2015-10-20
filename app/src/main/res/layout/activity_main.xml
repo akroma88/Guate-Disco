@@ -16,7 +16,7 @@
         android:layout_marginTop="38dp" />
 
 
-    <Button
+    <ImageButton
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,9 +25,11 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="41dp"
-        android:layout_marginEnd="41dp"
-        android:layout_marginBottom="86dp"
+        android:layout_marginRight="5dp"
+        
+        android:layout_marginBottom="5dp"
+        android:src="@drawable/next"
+        android:background="@null"
         android:onClick="onClickButtonSig" />
 
     <ImageView
