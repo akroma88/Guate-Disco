@@ -2,6 +2,7 @@ package com.ecys.ingenieria.usac.guate_disco;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,6 +24,7 @@ import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by akroma on 27/09/15.
@@ -33,14 +35,15 @@ public class Discoteca extends AppCompatActivity {
     static String idDisco;
     static String telefono;
 
-    TextView textViewNombre;
-    TextView textViewDireccion;
-    TextView textViewTelefono;
+    TextView textViewNombre, textViewDireccion, textViewTelefono;
     Button btnEscribOpionion;
-    ImageButton btnOfertas;
+    ImageButton btnOfertas, btnMapa, btnWeb;
     ListView list;
     CommentAdapter commentAdapter;
     String json="";
+    String jsonDisco="";
+    String webSite="";
+    Double latitud, altitud;
 
 
     @Override
@@ -54,12 +57,15 @@ public class Discoteca extends AppCompatActivity {
         list = (ListView)findViewById(R.id.listComment);
         btnEscribOpionion = (Button)findViewById(R.id.button_escribe_opinion);
         btnOfertas = (ImageButton)findViewById(R.id.btn_promo);
+        btnMapa = (ImageButton)findViewById(R.id.btnMapa);
+        btnWeb = (ImageButton)findViewById(R.id.btnWeb);
 
         textViewNombre.setText(this.nombre);
         textViewDireccion.setText(this.direccion);
         textViewTelefono.setText(this.telefono);
 
         getCommentarios(idDisco);
+        getDisco(idDisco);
 
 
         btnEscribOpionion.setOnClickListener(new View.OnClickListener() {
@@ -83,8 +89,34 @@ public class Discoteca extends AppCompatActivity {
                 toast.show();
             }
         });
+
+        btnMapa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Discoteca.this, MapsActivity.class);
+                intent.putExtra("latitud",latitud);
+                intent.putExtra("altitud",altitud);
+                intent.putExtra("place",nombre);
+                startActivity(intent);
+            }
+        });
+
+        btnWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myWebLink = new Intent(android.content.Intent.ACTION_VIEW);
+                myWebLink.setData(Uri.parse("http://www.google.com"));
+                startActivity(myWebLink);
+            }
+        });
     }
 
+
+    private void goToUrl (String url) {
+        Uri uriUrl = Uri.parse(url);
+        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+        startActivity(launchBrowser);
+    }
 
     public Handler handler = new Handler(new Handler.Callback() {
 
@@ -123,6 +155,26 @@ public class Discoteca extends AppCompatActivity {
         }
     });
 
+    public Handler handlerDisco = new Handler(new Handler.Callback() {
+
+        @Override
+        public boolean handleMessage(Message msg) {
+            switch (msg.what) {
+
+                case 0:
+                    Object obj = JSONValue.parse(jsonDisco);
+                    JSONArray mJsonArray = (JSONArray) obj;
+                    JSONObject mJsonObject = new JSONObject();
+                    mJsonObject = (JSONObject) mJsonArray.get(0);
+                    latitud=Double.parseDouble(mJsonObject.get("latitud").toString());
+                    altitud=Double.parseDouble(mJsonObject.get("altitud").toString());
+                    webSite=mJsonObject.get("webSite").toString();
+                    break;
+            }
+            return false;
+        }
+    });
+
 
     private final void getCommentarios(final String toConvert) {
         new Thread(new Runnable() {
@@ -136,4 +188,16 @@ public class Discoteca extends AppCompatActivity {
         }).start();
     }
 
+
+    private final void getDisco(final String toConvert) {
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                SoapRequests ex = new SoapRequests();
+                jsonDisco = ex.getObtainData(toConvert,"getDisco","idDisc");
+                handlerDisco.sendEmptyMessage(0);
+            }
+        }).start();
+    }
 }
