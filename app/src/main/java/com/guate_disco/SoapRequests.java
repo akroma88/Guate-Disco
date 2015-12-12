@@ -1,4 +1,4 @@
-package com.ecys.ingenieria.usac.guate_disco;
+package com.guate_disco;
 
 import android.util.Log;
 
@@ -25,9 +25,9 @@ import java.util.List;
 public class SoapRequests {
 
     private static final boolean DEBUG_SOAP_REQUEST_RESPONSE = true;
-    //public final static String URL = "http://192.168.1.228:8080/Calc1/Calc1?WSDL";
-    public final static String URL = "http://192.168.1.94:8084/WS-Guate-Disco/MyWebService?wsdl";
+    //public final static String URL = "http://192.168.1.46:8084/WS-Guate-Disco/MyWebService?wsdl";
     //public final static String URL = "http://uakkb108bec2.akroma88.koding.io:9763/WS-Guate-Disco/MyWebService?wsdl";
+    public final static String URL = "http://wsguatedisco-guate.rhcloud.com/MyWebService?wsdl";
     public static final String NAMESPACE = "http://pack1";
     public static final String SOAP_ACTION_PREFIX = "/";
     private static String METHOD = "getDiscos";
@@ -72,10 +72,13 @@ public class SoapRequests {
 
         } catch (SocketTimeoutException t) {
             t.printStackTrace();
+            data = "errorWS";
         } catch (IOException i) {
             i.printStackTrace();
+            data = "errorWS";
         } catch (Exception q) {
             q.printStackTrace();
+            data = "errorWS";
         }
         return data;
     }

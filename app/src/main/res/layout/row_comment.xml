@@ -6,7 +6,6 @@
     android:orientation="horizontal"
     android:padding="5dip" >
 
-    <!--  ListRow Left sied Thumbnail image -->
     <LinearLayout android:id="@+id/thumbnail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,10 +17,9 @@
             android:id="@+id/imageUser"
             android:layout_width="50dip"
             android:layout_height="50dip"
-            android:src="@drawable/rihanna"/>
+            android:src="@drawable/bambo"/>
     </LinearLayout>
 
-    <!-- Title Of disco-->
     <TextView
         android:id="@+id/nameUser"
         android:layout_width="wrap_content"
@@ -37,9 +35,10 @@
     <RatingBar
         android:id="@+id/commetDiscRating"
         android:layout_width="wrap_content"
-        android:layout_height="17dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="13dip"
         android:layout_marginLeft="5dip"
-        android:layout_toRightOf="@+id/nameUser"
+        android:layout_toRightOf="@+id/thumbnail"
         style="@style/commentRatingBar"
         android:numStars="5"
         android:rating="2.5"
@@ -53,6 +52,7 @@
         android:layout_alignTop="@+id/thumbnail"
         android:layout_toRightOf="@+id/commetDiscRating"
         android:text="2015-10-07"
+        android:layout_marginTop="13dip"
         android:textColor="#040404"
         android:typeface="sans"
         android:textSize="10dip"
@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:textColor="#343434"
         android:textSize="10dip"
-        android:layout_marginTop="15dip"
+        android:layout_marginTop="27dip"
         android:layout_marginLeft="1dip"
         android:layout_toRightOf="@+id/thumbnail"
         android:text="Hay opciones como amigos, buscar amigos, paginas entre otras que la aplicacion no carga... tengo una tablet samsung galaxy tab 3 y nunca me habia dado problemas hasta estas ultimas 2 actualizaciones." />

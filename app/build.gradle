@@ -5,10 +5,10 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.ecys.ingenieria.usac.guate_disco"
+        applicationId "com.guate_disco"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 1
+        versionCode 3
         versionName "1.0"
     }
     buildTypes {

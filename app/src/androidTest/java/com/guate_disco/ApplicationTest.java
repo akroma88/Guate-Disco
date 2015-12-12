@@ -1,4 +1,4 @@
-package com.ecys.ingenieria.usac.guate_disco;
+package com.guate_disco;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

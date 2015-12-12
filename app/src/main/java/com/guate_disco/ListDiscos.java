@@ -1,7 +1,9 @@
-package com.ecys.ingenieria.usac.guate_disco;
+package com.guate_disco;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,12 +14,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import java.util.ArrayList;
 import java.util.List;
+import com.guate_disco.LazyAdapter;
+import com.guate_disco.DTO_Discoteca;
 
 /**
  * Created by akroma on 24/09/15.
@@ -42,9 +47,10 @@ public class ListDiscos extends AppCompatActivity {
 
         final List<String> list = new ArrayList<String>();
         list.add("todos");
-        list.add("10");
-        list.add("1");
-        list.add("3");
+        list.add("1"); list.add("2"); list.add("3"); list.add("4");
+        list.add("5"); list.add("6"); list.add("7"); list.add("8");
+        list.add("9"); list.add("10"); list.add("11"); list.add("12");
+        list.add("13"); list.add("14"); list.add("15"); list.add("16");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -63,9 +69,16 @@ public class ListDiscos extends AppCompatActivity {
         spinnerZonas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (selectionCurrent[0] != position){
-                    Log.i("zona",""+list.get(position));
-                    getDiscos("" + list.get(position));
+                if (selectionCurrent[0] != position) {
+                    Log.i("zona", "" + list.get(position));
+                    if(checkConnectivity()){
+                        getDiscos("" + list.get(position));
+                    }else{
+                        CharSequence text = "No tienes conexion a internet!";
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
                 }
                 selectionCurrent[0] = position;
             }
@@ -77,8 +90,14 @@ public class ListDiscos extends AppCompatActivity {
         });
 
 
-
-        getDiscos("todos");
+        if(checkConnectivity()){
+            getDiscos("todos");
+        }else{
+            CharSequence text = "No tienes conexion a internet!";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
 
 
     }
@@ -88,7 +107,6 @@ public class ListDiscos extends AppCompatActivity {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
-
                 case 0:
                     ArrayList<DTO_Discoteca> discos= new ArrayList<DTO_Discoteca>();
                     Object obj = JSONValue.parse(json);
@@ -148,5 +166,19 @@ public class ListDiscos extends AppCompatActivity {
         }).start();
     }
 
+
+    private boolean checkConnectivity()
+    {
+        boolean enabled = true;
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = connectivityManager.getActiveNetworkInfo();
+
+        if ((info == null || !info.isConnected() || !info.isAvailable()))
+        {
+            enabled = false;
+        }
+        return enabled;
+    }
 
 }

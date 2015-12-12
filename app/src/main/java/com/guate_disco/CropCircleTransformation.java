@@ -1,4 +1,4 @@
-package com.ecys.ingenieria.usac.guate_disco;
+package com.guate_disco;
 
 /**
  * Created by akroma on 13/10/15.

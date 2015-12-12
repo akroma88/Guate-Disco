@@ -14,5 +14,6 @@
     <!- -->
     <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
     <string name="title_activity_list_disc">ListDisc</string>
-    <string name="facebook_app_id">1646164949000192</string>
+    <string name="facebook_app_id">1479869405655364</string>
+    <string name="banner_ad_unit_id">ca-app-pub-4736692000610160/7084701666</string>
 </resources>

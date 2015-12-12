@@ -1,4 +1,4 @@
-package com.ecys.ingenieria.usac.guate_disco;
+package com.guate_disco;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,10 +9,8 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;

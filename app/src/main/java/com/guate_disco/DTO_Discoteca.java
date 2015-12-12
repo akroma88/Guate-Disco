@@ -1,4 +1,4 @@
-package com.ecys.ingenieria.usac.guate_disco;
+package com.guate_disco;
 
 /**
  * Created by akroma on 6/10/15.
@@ -9,6 +9,7 @@ public class DTO_Discoteca {
     private String direccion;
     private int rt;
     private String telefono;
+    private String descripcion;
 
     public String getId() {
         return id;
@@ -49,4 +50,6 @@ public class DTO_Discoteca {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
+
 }

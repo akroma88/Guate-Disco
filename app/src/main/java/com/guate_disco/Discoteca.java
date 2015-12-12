@@ -1,4 +1,4 @@
-package com.ecys.ingenieria.usac.guate_disco;
+package com.guate_disco;
 
 import android.content.Context;
 import android.content.Intent;
@@ -35,16 +35,21 @@ public class Discoteca extends AppCompatActivity {
     static String idDisco;
     static String telefono;
 
-    TextView textViewNombre, textViewDireccion, textViewTelefono;
+    TextView textViewNombre, textViewDireccion, textViewTelefono, textDescripcion;
     Button btnEscribOpionion;
-    ImageButton btnOfertas, btnMapa, btnWeb;
+    ImageButton btnOfertas, btnMapa, btnWeb, btnFb, btnTwitt;
     ListView list;
     CommentAdapter commentAdapter;
     String json="";
     String jsonDisco="";
-    String webSite="";
+    String webSite,facebook,twitter;
     Double latitud, altitud;
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        getCommentarios(idDisco);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +64,8 @@ public class Discoteca extends AppCompatActivity {
         btnOfertas = (ImageButton)findViewById(R.id.btn_promo);
         btnMapa = (ImageButton)findViewById(R.id.btnMapa);
         btnWeb = (ImageButton)findViewById(R.id.btnWeb);
+        btnFb = (ImageButton)findViewById(R.id.btnFb);
+        btnTwitt = (ImageButton)findViewById(R.id.btnTwitter);
 
         textViewNombre.setText(this.nombre);
         textViewDireccion.setText(this.direccion);
@@ -87,6 +94,11 @@ public class Discoteca extends AppCompatActivity {
 
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
+/*
+                Intent intent = new Intent(Discoteca.this, ListEventos.class);
+                startActivity(intent);
+                ListEventos.idDisco = idDisco;*/
+
             }
         });
 
@@ -104,9 +116,28 @@ public class Discoteca extends AppCompatActivity {
         btnWeb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myWebLink = new Intent(android.content.Intent.ACTION_VIEW);
-                myWebLink.setData(Uri.parse("http://www.google.com"));
-                startActivity(myWebLink);
+                goToUrl(webSite);
+            }
+        });
+
+        btnFb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToUrl(facebook);
+
+
+                /*final String url = "fb://page/172531009566234";
+                Intent facebookAppIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                facebookAppIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+                startActivity(facebookAppIntent);*/
+
+            }
+        });
+
+        btnTwitt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToUrl(twitter);
             }
         });
     }
@@ -168,7 +199,28 @@ public class Discoteca extends AppCompatActivity {
                     mJsonObject = (JSONObject) mJsonArray.get(0);
                     latitud=Double.parseDouble(mJsonObject.get("latitud").toString());
                     altitud=Double.parseDouble(mJsonObject.get("altitud").toString());
+
+                    btnWeb = (ImageButton)findViewById(R.id.btnWeb);
+                    btnFb = (ImageButton)findViewById(R.id.btnFb);
+                    btnTwitt = (ImageButton)findViewById(R.id.btnTwitter);
+                    textDescripcion = (TextView)findViewById(R.id.descripcion);
+
+                    textDescripcion.setText(mJsonObject.get("descripcion").toString());
+
                     webSite=mJsonObject.get("webSite").toString();
+                    if(!webSite.equalsIgnoreCase("null")){
+                        btnWeb.setVisibility(View.VISIBLE);
+                    }
+
+                    facebook=mJsonObject.get("facebook").toString();
+                    if(!facebook.equalsIgnoreCase("null")){
+                        btnFb.setVisibility(View.VISIBLE);
+                    }
+
+                    twitter=mJsonObject.get("twitter").toString();
+                    if(!twitter.equalsIgnoreCase("null")){
+                        btnTwitt.setVisibility(View.VISIBLE);
+                    }
                     break;
             }
             return false;
